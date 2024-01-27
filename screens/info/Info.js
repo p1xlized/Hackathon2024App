@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Button, Layout, Text } from '@ui-kitten/components';
 import { useState} from "react";
-import ServicesCard from "../../componets/ServicesCard";
+import ServicesCard from "../../components/ServicesCard";
 
 function info() {
     const [counter, setCounter] = useState(0);
