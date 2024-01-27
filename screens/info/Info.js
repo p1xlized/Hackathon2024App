@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Layout, Text } from '@ui-kitten/components';
 import { useState} from "react";
 
-function About() {
+function info() {
     const [counter, setCounter] = useState(0);
 
     return (
@@ -32,4 +32,4 @@ function About() {
       marginHorizontal: 8,
     },
   });
-export default About;
+export default info;
