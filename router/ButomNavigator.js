@@ -10,7 +10,10 @@ const DrawerNavigator = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={HomeStack} />
-            <Tab.Screen name="Infor" component={InfoStack} />
+            <Tab.Screen name="Évènements" component={InfoStack} />
+            <Tab.Screen name="Services" component={InfoStack} />
+            <Tab.Screen name="Babillard" component={InfoStack} />
+            <Tab.Screen name="Alertes" component={InfoStack} />
         </Tab.Navigator>
     );
 };
