@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "AppTestReactive",
+    "slug": "AppTestReactive",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "AppTestReactive"
+}
