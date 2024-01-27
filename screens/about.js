@@ -1,18 +1,35 @@
-import {Button, Text, View} from "react-native";
+import { StyleSheet } from 'react-native';
+import { Button, Layout, Text } from '@ui-kitten/components';
+import { useState} from "react";
 
-function About({navigation}) {
+function About() {
+    const [counter, setCounter] = useState(0);
+
     return (
-        <View>
-            <Text>Home Screen</Text>
-
-            <Button
-                title="Go to Bitch's profile"
-                onPress={() =>
-                    navigation.navigate('Profile')
-                }
-            />
-        </View>
+      <Layout
+        style={styles.container}
+        level='1'
+      >
+  
+        <Button onPress={() => setCounter(counter + 1)}>
+          BUTTON
+        </Button>
+  
+        <Text style={styles.text}>
+          {`Pressed ${counter} times`}
+        </Text>
+  
+      </Layout>
     );
-}
-
+  };
+  
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    text: {
+      marginHorizontal: 8,
+    },
+  });
 export default About;

@@ -1,22 +1,16 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import DrawerNavigator from "./DrawerNavigator";
-import Details from "./screens/details";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import "react-native-gesture-handler";
+import DrawerNavigator from "./router/DrawerNavigator";
+import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
+import * as eva from '@eva-design/eva';
 
 export default function App() {
     return (
+      <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Root"
-                    component={DrawerNavigator}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen name="Details" component={Details} />
-            </Stack.Navigator>
+          <DrawerNavigator />
         </NavigationContainer>
+      </ApplicationProvider>
     );
-}
+  }
