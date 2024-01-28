@@ -1,26 +1,13 @@
-import {
-  Dimensions,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { Button, Layout, Text } from "@ui-kitten/components";
-import { useState, useEffect } from "react";
-import ServicesCard from "../../components/ServicesCard";
+import React from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { Button } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
 
 function Info({ navigation }) {
-  // init the state
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+  const [data, setData] = React.useState([]);
+  const [error, setError] = React.useState(null);
 
-  // flatlist Variables
-  const screenWidth = Dimensions.get("window").width;
-  const numColumns = 2;
-  const gap = 5;
-
-  // fetch data from database
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         const { data, error } = await supabase.from("distinct_types").select();
@@ -38,26 +25,29 @@ function Info({ navigation }) {
     fetchData();
   }, []);
 
-  // UI
+  const renderButton = ({ item }) => (
+    <Button
+      appearance='outline'
+      status='basic'
+      style={styles.button}
+      onPress={() => {
+        console.log("pressed");
+        navigation.navigate("ServicesDetail", item);
+      }}
+    >
+      {item.type}
+    </Button>
+  );
+
   return (
-    <Layout style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={data}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("ServicesDetail", { type: item.type })
-            }
-          >
-            <ServicesCard type={item.type} />
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item, index) => index.toString()} // Use index as the key
-        numColumns={numColumns}
-        contentContainerStyle={{ gap }}
-        columnWrapperStyle={{ gap }}
+        renderItem={renderButton}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2} // Set the number of columns to 2
       />
-    </Layout>
+    </View>
   );
 }
 
@@ -65,6 +55,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 5,
+    marginTop: 10,
+  },
+  button: {
+    flex: 1,
+    aspectRatio: 1, // This will make the button square
+    margin: 5, // Adjust the margin as needed
   },
 });
 

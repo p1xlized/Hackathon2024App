@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
-import {supa} from
+
 
 export default function Profil(){
     //style sheets
