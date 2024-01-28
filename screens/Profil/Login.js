@@ -10,7 +10,7 @@ export default function Login({navigation}) {
     const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
 
-    const lecontext = useContext(Context);
+    const context = useContext(Context);
 
     const handleLogIn = async () => {
         try {
@@ -23,8 +23,8 @@ export default function Login({navigation}) {
                 if (error.toString().includes("Invalid login")) alert("Courriel ou mot de passe invalide. Veuillez réessayer.")
                 else if (error.toString().includes("not confirmed")) alert("Veuillez confirmer votre courriel pour continuer.")
             } else {
-                lecontext.setToken(data.session.access_token.toString());
-                lecontext.setId(data.session.user.id.toString());
+                context.setToken(data.session.access_token.toString());
+                context.setId(data.session.user.id.toString());
 
                 navigation.navigate("Accueil")
             }

@@ -24,6 +24,7 @@ import supabase from "../../lib/supabase";
   },
 ];*/
 
+
 export default function Billboard() {
     const [eventsData, setEventsData] = useState(null)
 

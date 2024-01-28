@@ -5,7 +5,7 @@ import supabase from "../../lib/supabase";
 import {Context} from "../../App";
 
 export default function Profil({navigation}){
-    const lecontext = useContext(Context)
+    const context = useContext(Context)
 
     const [photoProfil, setPhotoProfil] = useState("")
     const [prenom, setPrenom] = useState("")
@@ -16,11 +16,10 @@ export default function Profil({navigation}){
 
     async function getProfil(){
         try {
-            console.log(lecontext.id)
             const { data: users, error } = await supabase
                 .from('users')
                 .select("*")
-                .eq('id', lecontext.id)
+                .eq('id', context.id)
 
 
             console.log(users)
@@ -45,7 +44,7 @@ export default function Profil({navigation}){
     },[])
 
     function handleLogOut() {
-        lecontext.setToken(null)
+        context.setToken(null)
         navigation.navigate("Accueil")
         alert("vous êtes déconnecté")
     }
