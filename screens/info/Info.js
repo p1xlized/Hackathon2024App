@@ -4,8 +4,9 @@ import { Button } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
 
 function Info({ navigation }) {
-  const [data, setData] = React.useState([]);
-  const [error, setError] = React.useState(null);
+  // init the state
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
 
   React.useEffect(() => {
     const fetchData = async () => {

@@ -1,6 +1,6 @@
 import {Button, View} from "react-native";
 
-function About({navigation}) {
+function Login({navigation}) {
     return (
         <View>
             <Button
