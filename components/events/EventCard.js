@@ -43,9 +43,11 @@ const styles = StyleSheet.create({
     card: {
         display: 'flex',
         flexDirection: 'row', // Set flexDirection to 'row' for a horizontal layout
+        overflow: "hidden",
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        marginVertical: 8,
+        backgroundColor: "white",
+        borderRadius: 10
     },
     imageContainer: {
         flex: 1, // Take 1/3 of the horizontal space
@@ -61,6 +63,6 @@ const styles = StyleSheet.create({
     },
     cardImageLeft: {
         resizeMode: 'cover',
-        height: '100%', // Set height to '100%' to take the full height of the container
+        aspectRatio: 1
     },
 });

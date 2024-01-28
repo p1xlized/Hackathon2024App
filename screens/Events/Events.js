@@ -1,4 +1,4 @@
-import {EventCard} from "../../components/EventCard";
+import {EventCard} from "../../components/events/EventCard";
 import {FlatList, StyleSheet, TextInput, View, Button as ReactButton, TouchableOpacity} from "react-native";
 import {Button, Card, Icon, Layout, Modal, Text} from "@ui-kitten/components";
 import {useEffect, useState} from "react";
@@ -11,6 +11,8 @@ export function Events({navigation}) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
+
+                // Get event data
                 const {data, error} = await supabase
                     .from("events")
                     .select("*")
@@ -60,7 +62,7 @@ export function Events({navigation}) {
                               data={events}
                               keyExtractor={(item, index) => item.id.toString() }
                               renderItem={({item, index}) => <EventCard eventName={item.name} locationName={item.location}></EventCard>}
-                              ItemSeparatorComponent={() => <View style={{height: 5}}/>}
+                              ItemSeparatorComponent={() => <View style={{height: 7}}/>}
                     />
                 </View>
             }
