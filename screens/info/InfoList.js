@@ -38,7 +38,6 @@ const InfoList = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-      <Map />
         <Layout>
           {data.map((item) => (
             <View style={styles.ServicesCard} key={item.id}>

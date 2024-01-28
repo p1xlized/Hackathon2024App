@@ -1,3 +1,4 @@
+// Header.js
 import React from "react";
 import {
   Icon,
@@ -12,7 +13,6 @@ import {
 import { StyleSheet, Modal, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Reminder from "./Reminder";
-import {useRoute} from "@react-navigation/native";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
@@ -22,7 +22,7 @@ const EditIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
 const CloseIcon = (props) => <Icon {...props} name="close-circle" />;
 
-export const Header = () => {
+export const Header = ({ navigation }) => {
   const route = useRoute();
 
   const [visible, setVisible] = React.useState(false);
@@ -44,18 +44,21 @@ export const Header = () => {
         style={styles.overflowMenu}
       >
         <View style={styles.closeButtonContainer}>
-        <Text style={styles.Text}>Rappels</Text>
-        <Button
-        style={styles.closeButton}
-          title="Close"
-          onPress={toggleMenu}
-          status="basic"
-          accessoryLeft={CloseIcon}
-        />
+          <Text style={styles.Text}>Rappels</Text>
+          <Button
+            style={styles.closeButton}
+            title="Close"
+            onPress={toggleMenu}
+            status="basic"
+            accessoryLeft={CloseIcon}
+          />
         </View>
-        <Reminder style={styles.notifications}/>
+        <Reminder style={styles.notifications} />
       </Modal>
-      <TopNavigationAction icon={EditIcon} />
+      <TopNavigationAction
+        icon={EditIcon}
+        onPress={() => navigation.navigate("AddEvent")}
+      />
     </>
   );
 
@@ -66,47 +69,44 @@ export const Header = () => {
       <TopNavigation
         alignment="center"
         title="CityLife"
-        subtitle={route.name} // Set the subtitle based on the current route name
+        subtitle={route.name}
         accessoryLeft={renderBackAction}
         accessoryRight={renderRightActions}
       />
     </Layout>
   );
 };
-// ...
 
 const styles = StyleSheet.create({
-    container: {
-      paddingTop: 25,
-      minHeight: 10,
-    },
-    overflowMenu: {
-      padding: 5,
-      width: "100%",
-      height: 400,
-      alignSelf: "flex-end",
-    },
-    modalContainer: {
-      flex: 1,
-      justifyContent: "space-between",
-    },
-    closeButtonContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      padding: 10,
-      alignItems: "flex-start",
-    },
-    closeButton: {
-      width: 20,
-      height: 20,
-  
-    },
-    Text:{
-        margin: 12,
-    },
-    notifications: {
-        marginHorizontal: 10,
-    }
-  });
-  
-  
+  container: {
+    paddingTop: 25,
+    minHeight: 10,
+  },
+  overflowMenu: {
+    width: "100%",
+    padding: 5,
+    width: "100%",
+    height: 400,
+    alignSelf: "flex-end",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  closeButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+    alignItems: "flex-start",
+  },
+  closeButton: {
+    width: 20,
+    height: 20,
+  },
+  Text: {
+    margin: 12,
+  },
+  notifications: {
+    marginHorizontal: 10,
+  },
+});
