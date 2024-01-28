@@ -9,8 +9,8 @@ import {
   Button,
 } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
+import Authors from "./Autors";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import Autors from "./Autors";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 const MenuIcon = (props) => <Icon {...props} name="menu-2-outline" />;
@@ -58,7 +58,7 @@ export const Header = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.closeButtonContainer}>
-            <Text style={styles.Text}>Auteurs: </Text>
+            <Text style={styles.Text}></Text>
             <Button
               style={styles.closeButton}
               onPress={toggleMenu}
@@ -67,11 +67,12 @@ export const Header = () => {
             />
           </View>
           <View style={styles.AutorsContainer}>
-            <Autors name="Alexandru Paduret" githubUsername="p1xlized" avatar={require('../assets/icon.jpeg')}/>
-            <Autors name="Nathan Decopain" githubUsername="NathanDecopain" avatar={require('../assets/icon2.png')}/>
-            <Autors name="Adrien Dolci" githubUsername="Skamandrius" avatar={require('../assets/icon3.png')}/>
-            <Autors name="Samy" githubUsername="samyiss" avatar={require('../assets/icon4.png')}/>
+            <Authors name="Alexandru Paduret" githubUsername="alexpadur" avatar={require('../assets/icon.jpeg')} />
+            <Authors name="Nathan Decopain" githubUsername="nathandeco" avatar={require('../assets/icon2.png')} />
+            <Authors name="Adrien Dolci" githubUsername="adriendolci" avatar={require('../assets/icon3.png')} />
+            <Authors name="Samy" githubUsername="samymhajeb" avatar={require('../assets/icon4.png')} />
           </View>
+          <Text style={styles.madeByText}>Made by Team NASA</Text>
         </View>
       </Modal>
     </Layout>
@@ -90,11 +91,12 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: "#ffff",
+    justifyContent: "space-between",
+    padding: 10,
   },
   closeButtonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
     alignItems: "flex-start",
   },
   closeButton: {
@@ -106,13 +108,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
-  notifications: {
-    marginHorizontal: 10,
-  },
   AutorsContainer: {
+    flex: 1, // Make it flexible to occupy available space
     marginTop: 10,
     marginHorizontal: 10,
-    // Add spacing between cards
-    marginBottom: 10,
+  },
+  madeByText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontStyle: 'italic',
+    marginTop: 10,
+    marginBottom: 30,
   },
 });
+
+export default Header;
