@@ -18,7 +18,7 @@ const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
 const MenuIcon = (props) => <Icon {...props} name="bell-outline" />;
 
-const EditIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
+
 
 const CloseIcon = (props) => <Icon {...props} name="close-circle" />;
 
@@ -55,10 +55,7 @@ export const Header = ({ navigation }) => {
         </View>
         <Reminder style={styles.notifications} />
       </Modal>
-      <TopNavigationAction
-        icon={EditIcon}
-        onPress={() => navigation.navigate("AddEvent")}
-      />
+
     </>
   );
 
