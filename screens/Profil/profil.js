@@ -1,11 +1,27 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
-import { currentUserContext } from '../../App';
+import supabase from "../../lib/building.png";
 
-import supabase from "../../lib/supabase";
 
 export default function Profil(){
+    //style sheets
+    const styles = StyleSheet.create({
+        view:{
+            margin: 5
+        },
+        container: {
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        },
+        text:{ 
+            margin: 4
+        },
+        button: {
+            margin: 2,
+          }
+      });
+
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
     const [firstName, setFirstName] = useState(null)
@@ -17,7 +33,6 @@ export default function Profil(){
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
-    //TODO(make get request from database)
     async function getProfil(){
         try{
             const id = await AsyncStorage.getItem("id");
@@ -45,16 +60,19 @@ export default function Profil(){
     }
 
     useEffect(() => {
-        getProfil()  
+        getProfil()
     },[])
+
     return(
         <View style={styles.view}>
             <Avatar
             size='giant'
             source={{uri: profilPicture}}
             />
+            <Text style={styles.text} category='s2'>
+                Prenom
+            </Text>
             <Input
-            label='Nom'
             value={firstName}
             disabled={!modifying}
             
@@ -120,20 +138,3 @@ export default function Profil(){
         </View>
     );
 }
-
-//style sheets
-const styles = StyleSheet.create({
-    view:{
-        margin: 5
-    },
-    container: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-    },
-    text:{ 
-        margin: 4
-    },
-    button: {
-        margin: 2,
-      }
-  });

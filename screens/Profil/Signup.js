@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import {ScrollView, StyleSheet, View, Image, TouchableHighlight} from 'react-native';
-import {Button, Text} from '@ui-kitten/components';
-import CustomInput from './CustomInput';
+import {
+    ScrollView,
+    StyleSheet,
+    View,
+    Image,
+    TouchableHighlight,
+    TouchableOpacity
+} from 'react-native';
+import {Button, Icon, Input, Text} from '@ui-kitten/components';
 import { supabase } from '../../lib/supabase';
 import * as ImagePicker from 'expo-image-picker';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignUp({navigation}) {
     const [nom, setNom] = useState("");
@@ -27,44 +33,76 @@ export default function SignUp({navigation}) {
         if (!result.canceled) setPhotoProfil(result.assets[0].uri);
     };
 
-    const handleChangeNom = (e) => {setNom(e.target.value)};
-
-    const handleChangePrenom = (e) => {
-        setPrenom(e.target.value);
-    };
-
-    const handleChangeRue = (e) => {
-        setRue(e.target.value);
-    };
-
-    const handleChangeCodePostal = (e) => {
-        setCodePostal(e.target.value);
-    };
-
-    const handleChangeContact = (e) => {
-        setContact(e.target.value);
-    };
-
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    };
-
     const handleSignUp = async () => {
-        try {
-            await supabase.auth.signUp({
-                email: contact,
-                password: password,
-            });
+        if (!validateInputs()) {
+            return;
+        }
 
-            await supabase.from('users').insert({
-                nom, prenom, rue, codePostal, photoProfil, contact
-            });
+        try {
+            supabase.auth.signUp({
+                email: contact, password: password
+            }).then( () => {
+                supabase.from('users')
+                    .insert([
+                        {
+                            nom: nom, prenom: prenom, rue: rue,
+                            codePostal: codePostal, photoProfil: photoProfil,
+                            email: contact, type: 5, verified: true
+                        },
+                    ])
+                    .select().then(async ({error}) => {
+                    if (error) alert("une erreur est survenue. Veuillez ressayer")
+                    else {
+                        try {
+                            await AsyncStorage.setItem("email", contact);
+                            await AsyncStorage.setItem("password", password);
+
+                            alert('Votre compte a été créé avec succès!');
+                            navigation.navigate("Se connecter")
+                        } catch (error) {
+                            console.error('Error saving data:', error);
+                        }
+                    }
+                })
+            })
+
+            console.log(photoProfil)
 
             // Handle success or navigate to the next screen
         } catch (error) {
+            alert("une erreur est survenue. Veuillez ressayer")
             console.error(error);
-            // Handle error
         }
+    };
+
+    const validateInputs = () => {
+        if (!nom || !prenom || !rue || !codePostal || !contact || !password) {
+            alert('Veuillez remplir tous les champs.');
+            return false;
+        }
+
+        return true;
+    };
+
+
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+
+    const toggleSecureEntry = () => {
+        setSecureTextEntry(!secureTextEntry);
+    };
+
+    const renderIcon = (props) => (
+        <TouchableOpacity onPress={toggleSecureEntry}>
+            <Icon
+                {...props}
+                name={secureTextEntry ? 'eye-off' : 'eye'}
+            />
+        </TouchableOpacity>
+    );
+
+    const validateCodePostal = (code) => {
+        const regex = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+        return regex.test(code);
     };
 
     return (
@@ -83,14 +121,80 @@ export default function SignUp({navigation}) {
                 Choisir une image de la gallery
             </Text>
             <View style={styles.content}>
-                <CustomInput placeHolder={"Prénom"} value={prenom} setValue={handleChangePrenom} />
-                <CustomInput placeHolder={"Nom"} value={nom} setValue={handleChangeNom} />
+                <View style={styles.inputContainer}>
+                    <Input
+                        value={prenom}
+                        placeholder={"Prénom"}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setPrenom(val)}
+                    />
+                </View>
 
-                <CustomInput placeHolder={"Rue"} value={rue} setValue={handleChangeRue} />
-                <CustomInput placeHolder={"Code postal"} value={codePostal} setValue={handleChangeCodePostal} />
+                <View style={styles.inputContainer}>
+                    <Input
+                        value={nom}
+                        placeholder={"Nom"}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setNom(val)}
+                    />
+                </View>
 
-                <CustomInput placeHolder={"Contact"} value={contact} setValue={handleChangeContact} />
-                <CustomInput placeHolder={"Mot de passe"} value={password} setValue={handleChangePassword} />
+                <View style={styles.inputContainer}>
+                    <Input
+                        placeholder={"Rue"}
+                        value={rue}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setRue(val)}
+                    />
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <Input
+                        value={codePostal}
+                        placeholder={"Code postal"}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setCodePostal(val)}
+                        onBlur={() => {
+                            if (!validateCodePostal(codePostal)) {
+                                alert("Le code postal doit avoir le format H1H 1H1");
+                                setCodePostal("")
+                            } else {
+                                setCodePostal(codePostal.toUpperCase());
+                            }
+                        }}
+                    />
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <Input
+                        value={contact}
+                        placeholder={"Contact"}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setContact(val)}
+                        onBlur={() => {
+                            if (!contact.includes("@")) {
+                                alert("Veuillez entrez un courriel valide");
+                            }
+                        }}
+                    />
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <Input
+                        style={styles.input}
+                        value={password}
+                        size='large'
+                        placeholder={"Mot de passe"}
+                        accessoryRight={renderIcon}
+                        secureTextEntry={secureTextEntry}
+                        onChangeText={val => setPassword(val)}
+                    />
+                </View>
             </View>
 
             <Button
@@ -143,6 +247,11 @@ const styles = StyleSheet.create({
         height: 90,
         width: 90,
         borderRadius: 40,
-    }
+    },
+    inputContainer: {
+        marginBottom: 20
+    },
+    input: {
+        borderRadius: 10
+    },
 });
-

@@ -1,5 +1,5 @@
 // DrawerNavigator.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/home';
 import InfoStack from './InfoStack';
@@ -9,22 +9,20 @@ import { TabBar } from '../components/TabBar';
 import GuestStack from "./GuestStack";
 import { Header } from '../components/Header';
 
-export const currentUserContext = React.createContext();
-
 const Tab = createBottomTabNavigator();
 const DrawerNavigator = (props) => {
   const [userId, setUserId] = useState(null);
   const hide = props.routeNames !== "Invité";
 
   const renderHeader = ({ route }) => (
-    <Header title={route.name} />
+      <Header title={route.name}/>
   );
 
   return (
     <Tab.Navigator
       tabBar={props => <TabBar {...props} />}
       screenOptions={{
-        header: ({ route }) => renderHeader({ route }),
+        header: ({ route }) => renderHeader({route}),
       }}
     >
       <Tab.Screen name="Accueil" component={HomeStack} />
