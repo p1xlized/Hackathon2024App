@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View, Image, TouchableHighlight, TouchableOpacity} from 'react-native';
 import {Button, Icon, Input, Text} from '@ui-kitten/components';
 import { supabase } from '../../lib/supabase';
 import Logo from '../../lib/building.png';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Context} from "../../App";
 
 export default function Login({navigation}) {
     const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
+
+    const lecontext = useContext(Context);
 
     const handleLogIn = async () => {
         try {
@@ -20,16 +23,10 @@ export default function Login({navigation}) {
                 if (error.toString().includes("Invalid login")) alert("Courriel ou mot de passe invalide. Veuillez réessayer.")
                 else if (error.toString().includes("not confirmed")) alert("Veuillez confirmer votre courriel pour continuer.")
             } else {
-                const id = data.session.user.id.toString()
-                const token = data.session.access_token.toString()
-                try {
-                    await AsyncStorage.setItem("id", id);
-                    await AsyncStorage.setItem("token", token);
+                lecontext.setToken(data.session.access_token.toString());
+                lecontext.setId(data.session.user.id.toString());
 
-                    navigation.navigate("Accueil")
-                } catch (error) {
-                    console.error('Error saving data:', error);
-                }
+                navigation.navigate("Accueil")
             }
         } catch (error) {
             console.error(error);

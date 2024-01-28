@@ -41,10 +41,12 @@ export default function SignUp({navigation}) {
         try {
             supabase.auth.signUp({
                 email: contact, password: password
-            }).then( () => {
+            }).then( (data) => {
+                console.log(data)
                 supabase.from('users')
                     .insert([
                         {
+                            id: data.data.user.id,
                             nom: nom, prenom: prenom, rue: rue,
                             codePostal: codePostal, photoProfil: photoProfil,
                             email: contact, type: 5, verified: true
