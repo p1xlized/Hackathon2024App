@@ -1,28 +1,15 @@
-// Header.js
 import React from "react";
-import {
-  Icon,
-  Layout,
-  MenuItem,
-  OverflowMenu,
-  TopNavigation,
-  TopNavigationAction,
-  Button,
-  Text,
-} from "@ui-kitten/components";
-import { StyleSheet, Modal, View } from "react-native";
+import { Icon, Layout, TopNavigation, TopNavigationAction, Button, Text, Modal, View } from "@ui-kitten/components";
+import { StyleSheet } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Reminder from "./Reminder";
-import {useRoute} from "@react-navigation/native";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
-
 const MenuIcon = (props) => <Icon {...props} name="bell-outline" />;
-
-
-
 const CloseIcon = (props) => <Icon {...props} name="close-circle" />;
 
-export const Header = ({ navigation }) => {
+export const Header = () => {
+  const navigation = useNavigation();
   const route = useRoute();
 
   const [visible, setVisible] = React.useState(false);
@@ -55,11 +42,12 @@ export const Header = ({ navigation }) => {
         </View>
         <Reminder style={styles.notifications} />
       </Modal>
-
     </>
   );
 
-  const renderBackAction = () => <TopNavigationAction icon={BackIcon} />;
+  const renderBackAction = () => (
+    <TopNavigationAction icon={BackIcon} onPress={() => navigation.goBack()} />
+  );
 
   return (
     <Layout style={styles.container} level="1">
@@ -85,9 +73,8 @@ const styles = StyleSheet.create({
     height: 400,
     alignSelf: "flex-end",
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "space-between",
+  backdrop: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   closeButtonContainer: {
     flexDirection: "row",
@@ -106,3 +93,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 });
+
+export default Header;
