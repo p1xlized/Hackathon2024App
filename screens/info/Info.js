@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { Button, Text } from '@ui-kitten/components';
+import { Button, Text, Icon } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
 import Reminder from '../../components/Reminder';
+
+// Import icons from ui-kitten
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
+);
 
 function Info({ navigation }) {
   const [data, setData] = useState([]);
@@ -26,6 +31,7 @@ function Info({ navigation }) {
     fetchData();
   }, []);
 
+  // Modify the renderButton function to include an icon
   const renderButton = ({ item }) => (
     <Button
       appearance='outline'
@@ -33,8 +39,9 @@ function Info({ navigation }) {
       style={styles.button}
       onPress={() => {
         console.log("pressed");
-        navigation.navigate("ServicesDetail", item);
+        navigation.navigate("ServicesList", item);
       }}
+      accessoryLeft={StarIcon} // Add an icon to the left of the button
     >
       {item.type}
     </Button>
@@ -43,8 +50,6 @@ function Info({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.reminderContainer}>
-        <Text category="h6">Reminders:</Text>
-        <Reminder />
       </View>
       <FlatList
         data={data}
