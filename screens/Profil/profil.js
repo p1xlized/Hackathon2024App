@@ -1,141 +1,137 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { View, StyleSheet } from "react-native";
-import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
-import { currentUserContext } from '../../App';
-
+import {View, StyleSheet, TouchableHighlight, Image, ScrollView, RefreshControl} from "react-native";
+import { Text, Button } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
+import {Context} from "../../App";
 
-export default function Profil(){
-    //profil variables
-    const [profilPicture, setProfilPicture] = useState("")
-    const [firstName, setFirstName] = useState(null)
-    const [lastName, setLastName] = useState(null)
-    const [emailAdress, setEmailAdress] = useState(null)
-    const [homeAdress, setHomeAdress] = useState(null)
-    const {userId} = useContext(currentUserContext);
+export default function Profil({navigation}){
+    const context = useContext(Context)
 
-    //sreen variables
-    const [modifying, setModifying] = useState(false)
+    const [photoProfil, setPhotoProfil] = useState("")
+    const [prenom, setPrenom] = useState("")
+    const [nom, setNom] = useState("")
+    const [email, setEmail] = useState("")
+    const [codePostal, setCodePostal] = useState("")
+    const [address, setAddress] = useState("")
 
-    //TODO(make get request from database)
     async function getProfil(){
-        console.log(userId)
-        setProfilPicture("")
-        setFirstName("John")
-        setLastName("Doe")
-        setEmailAdress("johnd@gmail.com")
-        setHomeAdress("1234 rue de la manche")
-        console.log("get profil")
-        /*
         try {
-            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal',photoProfil)
-            .where(id = userId);
-            if (error) {
-            console.log(error);
-            } else {
-            console.log(data);
+            const { data: users, error } = await supabase
+                .from('users')
+                .select("*")
+                .eq('id', context.id)
+
+
+            console.log(users)
+            if (error) alert("L'utilisateur recherché n'est pas trouvé")
+            else {
+                users.map((user) => {
+                    setPhotoProfil(user.photoProfil)
+                    setNom(user.nom)
+                    setPrenom(user.prenom)
+                    setEmail(user.email)
+                    setCodePostal(user.codePostal)
+                    setAddress(user.rue)
+                })
             }
         } catch (error) {
             console.error(error);
-            setError(error);
-        }*/
-    };
-
-    function updateProfil(){
-        //TODO(update profil with user input)
-        console.log(firstName,lastName,emailAdress,homeAdress)
+        }
     }
 
     useEffect(() => {
-        getProfil()  
+        getProfil().then(() => console.log("fetched User"))
     },[])
+
+    function handleLogOut() {
+        context.setToken(null)
+        navigation.navigate("Accueil")
+        alert("vous êtes déconnecté")
+    }
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 1000);
+    }, []);
+
+
     return(
-        <View style={styles.view}>
-            <Avatar
-            size='giant'
-            source={{uri: profilPicture}}
-            />
-            <Input
-            label='Nom'
-            value={firstName}
-            disabled={!modifying}
-            
-            onChangeText={nextValue => setFirstName(nextValue)}
-            />
-            <Text style={styles.text} category='s2'>
-                Nom
-            </Text>
-            <Input
-            value={lastName}
-            disabled={!modifying}
+        <ScrollView style={styles.container}
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
 
-            onChangeText={nextValue => setLastName(nextValue)}
-            />
-            <Text style={styles.text} category='s2'>
-                Adresse e-mail
-            </Text>
-            <Input
-            value={emailAdress}
-            disabled={!modifying}
+            <TouchableHighlight
+                style={styles.profileImgContainer}
+            >
+                <Image src={photoProfil} style={styles.profileImg} />
+            </TouchableHighlight>
 
-            onChangeText={nextValue => setEmailAdress(nextValue)}
-            />
-            <Text style={styles.text} category='s2'>
-                Adresse physique
-            </Text>
-            <Input
-            value={homeAdress}
-            disabled={!modifying}
+            <View style={styles.content}>
+                <Text
+                    style={styles.text}
+                    category='h5'
+                >
+                    {prenom + " " + nom}
+                </Text>
 
-            onChangeText={nextValue => setHomeAdress(nextValue)}
-            />
-            {!modifying ? 
+                <Text style={{textAlign: 'center'}} category='s1'> Adresse e-mail: {email} </Text>
+                <Text style={{textAlign: 'center', marginTop: 10}} category='s1'> Adresse: {address} </Text>
+                <Text style={{textAlign: 'center', marginTop: 10}} category='s1'> Code postal: {codePostal} </Text>
+            </View>
+
             <Button
             style={styles.button}
-            onPress={() =>{setModifying(true)}}
+            status={'danger'}
+            onPress={handleLogOut}
             >
-                Modifier
-            </Button>:
-            <Layout styles={styles.container} level='1'>
-                <Button
-                style={styles.button}
-                status='success'
-                onPress={() => {updateProfil}}
-                >
-                    Confirmer
-                </Button>
-                <Button
-                style={styles.button}
-                status='danger'
-                onPress={() => {
-                    getProfil
-                    setModifying(false)
-                    console.log(modifying)
-                }}
-                >
-                    Annuler
-                </Button>
-            </Layout>
-            }
-            
+                Se déconnecter
+            </Button>
 
-        </View>
+        </ScrollView>
     );
 }
 
+
 //style sheets
 const styles = StyleSheet.create({
-    view:{
-        margin: 5
-    },
     container: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
+        flex: 1,
+        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        paddingBottom: 20,
     },
-    text:{ 
-        margin: 4
+    text: {
+        textAlign: 'center',
+        marginBottom: 50,
     },
     button: {
-        margin: 2,
-      }
-  });
+        marginBottom: 50,
+        marginTop: 225,
+        width: '100%',
+        borderRadius: 25,
+    },
+    profileImgContainer: {
+        alignSelf: 'center',
+        maxWidth: 300,
+        maxHeight: 100,
+        marginTop: 125,
+        marginBottom: 10,
+        overflow: 'hidden',
+        height: 90,
+        width: 90,
+        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    profileImg: {
+        height: 90,
+        width: 90,
+        borderRadius: 40,
+    },
+});
+

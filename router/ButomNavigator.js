@@ -1,5 +1,5 @@
 // DrawerNavigator.js
-import React, { useState } from 'react';
+import React, {useContext} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/home';
 import InfoStack from './InfoStack';
@@ -8,29 +8,30 @@ import Profil from '../screens/Profil/profil';
 import { TabBar } from '../components/TabBar';
 import GuestStack from "./GuestStack";
 import { Header } from '../components/Header';
-
-export const currentUserContext = React.createContext();
+import AddEvent from "../screens/AddEvent";
+import {Context} from "../App";
 
 const Tab = createBottomTabNavigator();
 const DrawerNavigator = (props) => {
-  const [userId, setUserId] = useState(null);
   const hide = props.routeNames !== "Invité";
+  const {token} = useContext(Context);
 
-  const renderHeader = ({ route }) => (
-    <Header title={route.name} />
+  const renderHeader = ({ route, navigation }) => (
+    <Header title={route.name} navigation={navigation} />
   );
 
   return (
     <Tab.Navigator
       tabBar={props => <TabBar {...props} />}
       screenOptions={{
-        header: ({ route }) => renderHeader({ route }),
+        header: ({ route }) => renderHeader({route}),
       }}
     >
       <Tab.Screen name="Accueil" component={HomeStack} />
       <Tab.Screen name="Évènements" component={EventsStack} />
+      <Tab.Screen name="Publication évènement" component={AddEvent} />
       <Tab.Screen name="Services" component={InfoStack} />
-      {userId != null ? (
+      {token != null ? (
         <Tab.Screen name="Profil" component={Profil} />
       ) : (
         <Tab.Screen

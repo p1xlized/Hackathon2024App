@@ -16,6 +16,7 @@ const ServicesIcon = (props) => (
 const ProfileIcon = (props) => (
   <Icon {...props} name='person' />
 );
+const AddIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
 export const TabBar = ({ navigation, state }) => {
 
@@ -31,6 +32,7 @@ export const TabBar = ({ navigation, state }) => {
     >
       <BottomNavigationTab title='Accueil' icon={HomeIcon} />
       <BottomNavigationTab title='Évènements' icon={EventsIcon} />
+      <BottomNavigationTab title='Ajouter' icon={AddIcon} />
       <BottomNavigationTab title='Services' icon={ServicesIcon} />
       <BottomNavigationTab title='Profil' icon={ProfileIcon} />
     </BottomNavigation>

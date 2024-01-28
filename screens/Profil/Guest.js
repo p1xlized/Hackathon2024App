@@ -28,7 +28,7 @@ function Guest({navigation}) {
                 }}
             />
             <Text category={'h6'} style={styles.subtitle}
-                  onPress={() => {navigation.navigate("S'inscrire")}}>S'inscrire</Text>
+                  onPress={() => {navigation.navigate("Choisir type profil")}}>S'inscrire</Text>
         </View>
     );
 }
