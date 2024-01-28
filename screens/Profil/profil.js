@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
 import supabase from "../../lib/building.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Profil(){
