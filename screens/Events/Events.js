@@ -1,5 +1,5 @@
 import {EventCard} from "../../components/EventCard";
-import {FlatList, StyleSheet, TextInput, View} from "react-native";
+import {FlatList, StyleSheet, TextInput, View, Button as ReactButton, TouchableOpacity} from "react-native";
 import {Button, Card, Icon, Layout, Modal, Text} from "@ui-kitten/components";
 import {useState} from "react";
 
@@ -21,8 +21,12 @@ export function Events({navigation}) {
                 />
             </View>
             <Layout level={"2"} style={styles.searchFiltersContainer}>
-                <Text><Button style={styles.searchTag}>Some text</Button>
-                </Text>
+                <TouchableOpacity>
+                    <View style={styles.searchTag}>
+                        <Text category={"c1"} style={{color: "white"}}>un tag</Text>
+                        <Icon fill={"white"} style={styles.tagIcon} name={"close-outline"}></Icon>
+                    </View>
+                </TouchableOpacity>
             </Layout>
 
             <FlatList style={styles.topContainer}
@@ -67,6 +71,21 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
     searchTag: {
-        fontWeight: "normal"
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        columnGap: 6,
+        justifyContent: "space-between",
+        alignSelf: "flex-start",
+        backgroundColor: "orange",
+        borderRadius: 9,
+        paddingVertical: 3,
+        paddingHorizontal: 7,
+        verticalAlign: "middle"
+    },
+    tagIcon: {
+        width: 15,
+        height: 15,
+        marginTop: 3
     }
 })
