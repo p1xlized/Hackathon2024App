@@ -33,7 +33,7 @@ function Info({ navigation }) {
       style={styles.button}
       onPress={() => {
         console.log("pressed");
-        navigation.navigate("ServicesDetail", item);
+        navigation.navigate("ServicesList", item);
       }}
     >
       {item.type}

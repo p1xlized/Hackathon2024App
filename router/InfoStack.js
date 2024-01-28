@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Info from '../screens/info/Info';
-import InfoDetails from '../screens/info/InfoDetails';
-
+import InfoList from '../screens/info/InfoList';
+import InfoDetails from '../screens/info/InfoList';
 const Stack = createStackNavigator();
 
 const InfoStack = () => {
@@ -13,7 +13,8 @@ const InfoStack = () => {
       }}
     >
       <Stack.Screen name="Services" component={Info} />
-      <Stack.Screen name="ServicesDetail" component={InfoDetails} />
+      <Stack.Screen name="ServicesList" component={InfoList} />
+      <Stack.Screen name="ServicesDetails" component={InfoDetails} />
     </Stack.Navigator>
   );
 };

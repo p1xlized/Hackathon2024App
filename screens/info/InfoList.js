@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@ui-kitten/components";
 import supabase from "../../lib/supabase";
 import ServicesCard from "../../components/ServicesCard";
 
-const InfoDetails = ({ route }) => {
+const InfoList = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
+  function handlePress(item) {
+    navigation.navigate("ServicesDetails", item);
+  }
   // fetch data from database
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +40,11 @@ const InfoDetails = ({ route }) => {
           <Layout>
             {data.map((item) => (
               <View style={styles.ServicesCard}>
-                <ServicesCard key={item.id} data={item} />
+                <ServicesCard
+                  key={item.id}
+                  data={item}
+                  handlePress={() => handlePress(item)}
+                />
               </View>
             ))}
           </Layout>
@@ -60,4 +67,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-export default InfoDetails;
+export default InfoList;
