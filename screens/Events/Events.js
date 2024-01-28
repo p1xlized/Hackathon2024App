@@ -58,7 +58,7 @@ export function Events({navigation}) {
                     Object.keys(eventsMap).map(async (eventId) => {
                         const {data: eventData, error: eventError} = await supabase
                             .from('events')
-                            .select('id, name, starts_on, location')
+                            .select('id, name, starts_on, ends_on, location')
                             .eq('id', eventId)
                             .single();
 
@@ -77,13 +77,15 @@ export function Events({navigation}) {
                         id: eventId,
                         name: eventData.name,
                         starts_on: eventData.starts_on,
+                        ends_on: eventData.ends_on,
                         location: eventData.location,
                         tags: eventsMap[eventId].tags.map(tagId => ({id: tagId, name: tagNamesMap[tagId]})),
                     };
                 });
 
-                setEvents(result)
-                setFilteredEvents(result)
+                const sortedResult = result.sort((a, b) => b.starts_on - a.starts_on)
+                setEvents(sortedResult)
+                setFilteredEvents(sortedResult)
 
                 console.log(result);
             } catch (error) {
@@ -131,6 +133,7 @@ export function Events({navigation}) {
 
     useEffect(() => {
         console.log(tagFilters)
+
         async function filterEvents() {
             if (tagFilters.length < 1) {
                 setFilteredEvents(events)
@@ -187,19 +190,24 @@ export function Events({navigation}) {
                     </TouchableOpacity>
                 )}
             </Layout>
-            {filteredEvents &&
-                <View style={styles.eventsList}>
-                    <Text category={"h4"} style={styles.sectionDate}>27 janvier 2023</Text>
-                    <FlatList style={styles.topContainer}
+            <View>
+                {filteredEvents.length > 0 &&
+                    <FlatList style={styles.eventsList}
                               data={filteredEvents}
-                              keyExtractor={(item, index) => item.id.toString()}
-                              renderItem={({item, index}) => <EventCard eventName={item.name}
+                              keyExtractor={(item) => item.id}
+                              renderItem={({item, index}) =>
+                              {
+                                  console.log(`Rendering item ${index} with id ${item.id}`);
+                                  return <EventCard key={item.id} eventName={item.name}
                                                                         locationName={item.location}
-                                                                        tags={item.tags}></EventCard>}
+                                                                        startsOn={item.starts_on}
+                                                                        endsOn={item.ends_on}
+                                                                        tags={item.tags}/>}
+                              }
                               ItemSeparatorComponent={() => <View style={{height: 7}}/>}
                     />
-                </View>
-            }
+                }
+            </View>
 
             <Modal visible={modalVisible} backdropStyle={styles.backdrop}
                    onBackdropPress={() => setModalVisible(false)}>
@@ -272,6 +280,7 @@ const styles = StyleSheet.create({
         backgroundColor: "gray"
     },
     eventsList: {
+        height: 1000,
         margin: 4
     },
     sectionDate: {

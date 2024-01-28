@@ -18,11 +18,14 @@ const Header = () => {
     );
 };
 
-export const EventCard = ({ eventName = '', locationName = '', tags=[] }) => {
+export const EventCard = ({ eventName = '', locationName = '', tags=[], startsOn, endsOn }) => {
+    function formatDate(datestring, formatOptions) {
+        return new Date(datestring).toLocaleString("fr-ca", formatOptions)
+    }
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
-                <Image
+                <FullWidthImage
                     style={styles.cardImageLeft}
                     source={{
                         uri:
@@ -31,9 +34,10 @@ export const EventCard = ({ eventName = '', locationName = '', tags=[] }) => {
                 />
             </View>
             <View style={styles.textContainer}>
+                <Text category="c2">{(new Date(startsOn)).toLocaleString("fr-ca", {day: "numeric", month: "long", year: "numeric"})} {endsOn && `- ${(new Date(endsOn)).toLocaleString("fr-ca", {day: "numeric", month: "long", year: "numeric"})}`}</Text>
+                <Text category="c2">{formatDate(startsOn, {hour: "numeric", minutes: "numeric", hour12: "false"})} - {formatDate(endsOn, {hour: "numeric", minutes: "numeric", hour12: "false"})}</Text>
                 <Text category="s1">{eventName}</Text>
                 <Text category="c1">{locationName}</Text>
-                <Text category="c2">19h00 - 20h00</Text>
 
                 <View style={styles.tagList}>
                     { tags.length > 0 && tags.map((tag) => {
@@ -62,6 +66,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1, // Take 1/3 of the horizontal space
         marginRight: 8, // Add some margin between image and text
+        overflow: "hidden"
     },
     textContainer: {
         flex: 2, // Take 2/3 of the horizontal space
@@ -73,7 +78,6 @@ const styles = StyleSheet.create({
     },
     cardImageLeft: {
         resizeMode: 'cover',
-        height: "100%"
     },
     eventTag: {
         display: "flex",
