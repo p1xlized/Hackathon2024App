@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Button } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
@@ -8,7 +8,7 @@ function Info({ navigation }) {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const { data, error } = await supabase.from("distinct_types").select();
