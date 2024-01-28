@@ -14,7 +14,7 @@ const ServicesIcon = (props) => (
 );
 
 const ProfileIcon = (props) => (
-  <Icon {...props} name='person-outline' />
+  <Icon {...props} name='person' />
 );
 
 export const TabBar = ({ navigation, state }) => {
