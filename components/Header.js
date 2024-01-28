@@ -26,6 +26,12 @@ const MenuIcon = (props) => (
 );
 
 
+const EditIcon = (props) => (
+  <Icon
+    {...props}
+    name='plus-circle-outline'
+  />
+);
 
 
 export const Header = () => {
@@ -44,6 +50,7 @@ export const Header = () => {
     />
   );
 
+  
   const renderRightActions = () => (
     <>
       <OverflowMenu
@@ -54,6 +61,7 @@ export const Header = () => {
       >
         <Reminder />
       </OverflowMenu>
+        <TopNavigationAction icon={EditIcon} />
     </>
   );
 
@@ -85,7 +93,8 @@ const styles = StyleSheet.create({
   overflowMenu: {
     marginTop: 20,
     padding:5,
-    width: '120%',
+    width: '100%',
     height: 400,
+    alignSelf: 'center',
   },
 });

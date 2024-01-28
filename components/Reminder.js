@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Card, Text } from "@ui-kitten/components";
+import { Card, Divider, Text } from "@ui-kitten/components";
 
 import supabase from "../lib/supabase";
 
@@ -28,6 +28,8 @@ const Reminder = () => {
 
   return (
     <View>
+      <Text category="h6">Reminders:</Text>
+      <Divider />
       {data.map((item) => (
         <View key={item.id}>
           <Card status="danger">
