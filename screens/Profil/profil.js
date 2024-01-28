@@ -5,14 +5,14 @@ import { currentUserContext } from '../../App';
 
 import supabase from "../../lib/supabase";
 
-export default function Profil({navigation}){
+export default function Profil(){
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
     const [firstName, setFirstName] = useState(null)
     const [lastName, setLastName] = useState(null)
     const [emailAdress, setEmailAdress] = useState(null)
     const [homeAdress, setHomeAdress] = useState(null)
-    const {userId, setUserId} = useContext(currentUserContext);
+    const {userId} = useContext(currentUserContext);
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
@@ -28,7 +28,8 @@ export default function Profil({navigation}){
         console.log("get profil")
         /*
         try {
-            const { data, error } = await supabase.from('users').select('*');
+            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal',photoProfil)
+            .where(id = userId);
             if (error) {
             console.log(error);
             } else {
