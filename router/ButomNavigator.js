@@ -28,6 +28,7 @@ const DrawerNavigator = (props) => {
     >
       <Tab.Screen name="Accueil" component={HomeStack} />
       <Tab.Screen name="Évènements" component={EventsStack} />
+      <Tab.Screen name="AddEvent" component={AddEvent} />
       <Tab.Screen name="Services" component={InfoStack} />
       {userId != null ? (
         <Tab.Screen name="Profil" component={Profil} />
@@ -41,7 +42,6 @@ const DrawerNavigator = (props) => {
           name={"Invité"}
         />
       )}
-    <Tab.Screen name="AddEvent" component={AddEvent} />
     </Tab.Navigator>
   );
 };
