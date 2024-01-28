@@ -23,6 +23,10 @@ export default function Login({navigation}) {
                 if (error.toString().includes("Invalid login")) alert("Courriel ou mot de passe invalide. Veuillez réessayer.")
                 else if (error.toString().includes("not confirmed")) alert("Veuillez confirmer votre courriel pour continuer.")
             } else {
+                supabase.from("users").select('*').eq('id', data.session.user.id.toString()).then((data) => {
+                    context.setAddress(data[0].rue + " " + data[0].codePostal)
+                })
+
                 context.setToken(data.session.access_token.toString());
                 context.setId(data.session.user.id.toString());
 
