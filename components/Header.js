@@ -21,10 +21,7 @@ export const Header = () => {
   const handleGoBack = () => {
     if (navigation.canGoBack()) {
       navigation.goBack();
-    } else {
-      // Handle the case when there is no history in the navigation stack
-      // You may want to navigate to a specific screen or perform some other action
-    }
+    } 
   };
 
   return (

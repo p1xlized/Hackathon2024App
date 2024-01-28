@@ -30,9 +30,10 @@ const InfoList = ({ route, navigation }) => {
     fetchData();
   }, []);
 
-  const handlePress = (item) => {
+  const handlePress = (id) => {
     // Perform navigation logic here
-    navigation.navigate('ServicesDetails', { id: 1 });  };
+    navigation.navigate('ServicesDetails', { id });
+  };
 
   return (
     <View style={styles.container}>
@@ -40,7 +41,7 @@ const InfoList = ({ route, navigation }) => {
         <Layout>
           {data.map((item) => (
             <View style={styles.ServicesCard} key={item.id}>
-              <ServicesCard data={item} handlePress={handlePress} />
+              <ServicesCard data={item} handlePress={() => handlePress(item.id)} />
             </View>
           ))}
         </Layout>
