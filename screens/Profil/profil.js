@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
 
-export default function Profil(){
+export default function Profil({navigation}){
     //style sheets
     const styles = StyleSheet.create({
         view:{
@@ -27,11 +27,18 @@ export default function Profil(){
     const [lastName, setLastName] = useState(null)
     const [emailAdress, setEmailAdress] = useState(null)
     const [homeAdress, setHomeAdress] = useState(null)
+    const {userId, setUserId} = useContext(currentUserContext);
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
-    async function getProfil(){
+    setProfilPicture("")
+    setFirstName("John")
+    setLastName("Doe")
+    setEmailAdress("johnd@gmail.com")
+    setHomeAdress("1234 rue de la manche")
+    //TODO(make get request from database)
+    /*async function getProfil(){
         console.log("get profil")
         try {
             const { data, error } = await supabase.from('users').select('*');
@@ -44,7 +51,7 @@ export default function Profil(){
             console.error(error);
             setError(error);
         }
-    };
+    };*/
 
     function updateProfil(){
         //TODO(update profil with user input)
@@ -52,7 +59,12 @@ export default function Profil(){
     }
 
     useEffect(() => {
-        getProfil()
+        if(userId == null){
+            navigation.navigate("Login")
+        }
+        else{
+          getProfil()  
+        }
     },[])
 
     return(
@@ -61,10 +73,8 @@ export default function Profil(){
             size='giant'
             source={{uri: profilPicture}}
             />
-            <Text style={styles.text} category='s2'>
-                Prenom
-            </Text>
             <Input
+            label='Nom'
             value={firstName}
             disabled={!modifying}
             
