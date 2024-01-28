@@ -12,6 +12,7 @@ import {
 } from "@ui-kitten/components";
 import { StyleSheet, Modal, View } from "react-native";
 import Reminder from "./Reminder";
+import {useRoute} from "@react-navigation/native";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     minHeight: 10,
   },
   overflowMenu: {
-    width: "100%",
     padding: 5,
     width: "100%",
     height: 400,
