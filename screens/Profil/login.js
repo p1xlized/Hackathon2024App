@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase';
 import Logo from '../../lib/building.png';
 
 
-function LogIn() {
+export default  function LogIn({navigation}) {
     const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
 
@@ -104,6 +104,3 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     }
 });
-
-
-export default LogIn;

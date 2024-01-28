@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase';
 import * as ImagePicker from 'expo-image-picker';
 
 
-function SignUp() {
+export default function SignUp({navigation}) {
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
     const [rue, setRue] = useState("");
@@ -146,5 +146,3 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default SignUp;
