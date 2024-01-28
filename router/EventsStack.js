@@ -1,6 +1,7 @@
 //aboutStack.js import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Events} from "../screens/events";
+import {Events} from "../screens/Events/Events";
+import {EventSearchFilterOptions} from "../screens/Events/EventSearchFilterOptions";
 
 const Stack = createStackNavigator();
 
