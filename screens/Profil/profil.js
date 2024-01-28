@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
+
 import supabase from "../../lib/supabase";
 
 export default function Profil({navigation}){
