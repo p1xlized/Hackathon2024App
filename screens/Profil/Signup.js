@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {ScrollView, StyleSheet, View, Image, TouchableHighlight} from 'react-native';
 import {Button, Text} from '@ui-kitten/components';
-import CustomInput from './Profil/CustomInput';
-import { supabase } from '../lib/supabase';
+import CustomInput from './CustomInput';
+import { supabase } from '../../lib/supabase';
 import * as ImagePicker from 'expo-image-picker';
 
 

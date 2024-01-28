@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/home';
 import InfoStack from './InfoStack';
-import SignUp from "../screens/Signup";
+import SignUp from "../screens/Profil/Signup";
 import EventsStack from "./EventsStack";
 import Profil from '../screens/Profil/profil';
 import {TabBar} from '../components/TabBar';
+import Login from "../screens/Profil/Login";
 
 export const userInfos = React.createContext();
 
@@ -22,7 +23,7 @@ const DrawerNavigator = () => {
             {userId != null ? (
                 <Tab.Screen name="Profil" component={Profil} />
             ) : (
-                <Tab.Screen name="Login" component={SignUp} />
+                <Tab.Screen name="Se connecter" component={Login} />
             )}
         </Tab.Navigator>
     );
