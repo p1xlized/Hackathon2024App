@@ -3,7 +3,7 @@ import { Card, Text, Divider, Button } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 
 const ServicesCard = (props) => {
-  const { id, name, open, close, description } = props.data;
+  const { id, name, open, close, address,description } = props.data;
   const { handlePress } = props;
 
   return (
@@ -14,8 +14,9 @@ const ServicesCard = (props) => {
         <Text category="h8">{description}</Text>
         <Text category="s1">Open: {open}</Text>
         <Text category="s1">Close: {close}</Text>
+        <Text category="s1">{address}</Text>
+
       </View>
-      <Divider style={{ marginBottom: 20, backgroundColor: "#fff" }} />
     </Card>
   );
 };
