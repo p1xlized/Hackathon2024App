@@ -6,7 +6,7 @@ const InfoDetail = ({ route }) => {
   const { params } = route;
   const [detailData, setDetailData] = useState([]);
   const [error, setError] = useState(null);
-
+console.log(params.id);
   useEffect(() => {
     const fetchData = async () => {
       try {

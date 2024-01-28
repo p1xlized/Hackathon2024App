@@ -13,7 +13,8 @@ export default function App() {
 
     const [token, setToken] = useState(null)
     const [id, setId] = useState(null)
-    const ObjContext = {token, setToken, id, setId};
+    const [address, setAddress] = useState(null)
+    const ObjContext = {token, setToken, id, setId, address, setAddress};
 
     return (
         <Context.Provider value={ObjContext}>

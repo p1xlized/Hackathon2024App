@@ -65,9 +65,7 @@ export default function Profil({navigation}){
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }>
 
-            <TouchableHighlight
-                style={styles.profileImgContainer}
-            >
+            <TouchableHighlight style={styles.profileImgContainer}>
                 <Image src={photoProfil} style={styles.profileImg} />
             </TouchableHighlight>
 
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginBottom: 50,
-        marginTop: 225,
+        marginTop: 185,
         width: '100%',
         borderRadius: 25,
     },
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         maxWidth: 300,
         maxHeight: 100,
-        marginTop: 125,
+        marginTop: 75,
         marginBottom: 10,
         overflow: 'hidden',
         height: 90,
