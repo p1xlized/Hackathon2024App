@@ -1,5 +1,5 @@
 // DrawerNavigator.js
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/home';
 import InfoStack from './InfoStack';
@@ -9,11 +9,12 @@ import { TabBar } from '../components/TabBar';
 import GuestStack from "./GuestStack";
 import { Header } from '../components/Header';
 import AddEvent from "../screens/AddEvent";
+import {Context} from "../App";
 
 const Tab = createBottomTabNavigator();
 const DrawerNavigator = (props) => {
-  const [userId, setUserId] = useState(null);
   const hide = props.routeNames !== "Invité";
+  const {token} = useContext(Context);
 
   const renderHeader = ({ route, navigation }) => (
     <Header title={route.name} navigation={navigation} />
@@ -30,7 +31,7 @@ const DrawerNavigator = (props) => {
       <Tab.Screen name="Évènements" component={EventsStack} />
       <Tab.Screen name="AddEvent" component={AddEvent} />
       <Tab.Screen name="Services" component={InfoStack} />
-      {userId != null ? (
+      {token != null ? (
         <Tab.Screen name="Profil" component={Profil} />
       ) : (
         <Tab.Screen
