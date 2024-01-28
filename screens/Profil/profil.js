@@ -12,24 +12,22 @@ export default function Profil(){
     const [lastName, setLastName] = useState(null)
     const [emailAdress, setEmailAdress] = useState(null)
     const [homeAdress, setHomeAdress] = useState(null)
-    const {userId} = useContext(currentUserContext);
+    const [userId, setUserId] = useState(null)
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
     //TODO(make get request from database)
     async function getProfil(){
-        console.log(userId)
-        setProfilPicture("")
-        setFirstName("John")
-        setLastName("Doe")
-        setEmailAdress("johnd@gmail.com")
-        setHomeAdress("1234 rue de la manche")
-        console.log("get profil")
-        /*
+        try{
+            const id = await AsyncStorage.getItem("id");
+            setUserId(id);
+        } catch (error) {
+            console.error('Error getting data:', error);
+        }
         try {
-            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal',photoProfil)
-            .where(id = userId);
+            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal','photoProfil')
+            .eq('id', userId);
             if (error) {
             console.log(error);
             } else {
@@ -38,7 +36,7 @@ export default function Profil(){
         } catch (error) {
             console.error(error);
             setError(error);
-        }*/
+        }
     };
 
     function updateProfil(){
