@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { Button } from '@ui-kitten/components';
+import { Button, Text } from '@ui-kitten/components';
 import supabase from "../../lib/supabase";
+import Reminder from '../../components/Reminder';
 
 function Info({ navigation }) {
-  // init the state
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
@@ -33,7 +33,7 @@ function Info({ navigation }) {
       style={styles.button}
       onPress={() => {
         console.log("pressed");
-        navigation.navigate("ServicesList", item);
+        navigation.navigate("ServicesDetail", item);
       }}
     >
       {item.type}
@@ -42,11 +42,15 @@ function Info({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.reminderContainer}>
+        <Text category="h6">Reminders:</Text>
+        <Reminder />
+      </View>
       <FlatList
         data={data}
         renderItem={renderButton}
         keyExtractor={(item, index) => index.toString()}
-        numColumns={2} // Set the number of columns to 2
+        numColumns={2}
       />
     </View>
   );
@@ -58,10 +62,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginTop: 10,
   },
+  reminderContainer: {
+    marginVertical: 10,
+  },
   button: {
     flex: 1,
-    aspectRatio: 1, // This will make the button square
-    margin: 5, // Adjust the margin as needed
+    aspectRatio: 1,
+    margin: 5,
   },
 });
 
