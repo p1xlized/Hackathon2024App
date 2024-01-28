@@ -1,19 +1,23 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { View, FlatList, Alert, StyleSheet } from 'react-native';
+import {View, FlatList, Alert, StyleSheet, Image} from 'react-native';
+import { WebView } from 'react-native-webview';
 import EventCard from './Billboard/billboardCard';
-import {Text} from "@ui-kitten/components";
+import {Card, Text} from "@ui-kitten/components";
 import {Context} from "../App";
 import * as Location from 'expo-location';
-// const customData = require("../lib/collecteTrashMtl.geojson");
+import supabase from "../lib/supabase";
+import image from "../lib/10042953.png";
+import RappelCard from "./Billboard/RappelCard";
 
 const Home = () => {
     const [events, setEvents] = useState([]);
     const [page, setPage] = useState(1);
-    const [geo, setGeo] = useState();
     const {token} = useContext(Context);
 
     const [latitude, setLatitude] =  useState(0)
     const [longitude, setLongitude] =  useState(0)
+
+    const [rappels, setRappels] = useState()
 
     useEffect(() => {
         fetchData(page).then(() => console.log('fetched events'));
@@ -56,24 +60,11 @@ const Home = () => {
         let { coords } = await Location.getCurrentPositionAsync();
 
         if (coords) {
-            const { latitude, longitude } = coords;
+            const { latitude, longitude } = coords;0
             setLatitude(latitude)
             setLongitude(longitude)
         }
     };
-
-
-    // useEffect(() => {
-    //     const filteredObjects = customData.features.filter(feature => {
-    //         feature.geometry.coordinates.map((coordinate) => {
-    //             coordinate.map((d) => {
-    //                 return d === [latitude, longitude]
-    //             })
-    //         })
-    //     });
-    //
-    //     console.log(filteredObjects)
-    // }, [latitude, longitude]);
 
     const fetchData = async (currentPage) => {
         try {
@@ -116,9 +107,41 @@ const Home = () => {
         setPage((prevPage) => prevPage + 1);
     };
 
+    useEffect(() => {
+        getRappelsFromDb().then(() => console.log('fetched rappels'))
+    }, []);
+
+
+    async function getRappelsFromDb() {
+        try {
+            const { data: rappels, error } = await supabase
+                .from('weekly_events')
+                .select("*")
+                .eq('secteur', 'VRD-2')
+
+            if (error) alert("Une erreur est survenue. Veuillez réessayer.")
+            else {
+                setRappels(
+                    rappels.map((event) => ({
+                        id: event.title,
+                        title: event.titre,
+                        typeDechet: event.type_dechet,
+                        jourSemaine: event.jour_semaine,
+                        municipalite: event.municipalite,
+                        start_at: event.start_at
+                    }))
+                )
+            }
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+
     return (
         <View style={styles.container}>
-            {token !== null ? <>
+            {token !== null ? <View style={styles.viewRappel}>
                 <Text category={'h4'} style={styles.title}>Rappels</Text>
                 <View
                     style={{
@@ -127,15 +150,15 @@ const Home = () => {
                     }}
                 />
                 <FlatList
-                    data={events}
+                    horizontal={true}
+                    data={rappels}
                     keyExtractor={(item) => item.id}
-                    renderItem={({item}) => (
-                        <EventCard image={item.image} description={item.title} postedBy={item.postedBy}/>
+                    renderItem={({ item }) => (
+                        <RappelCard  titre={item.titre} jourSemaine={item.jourSemaine} typeDechet={item.typeDechet}
+                        municipalite={item.municipalite} start_at={item.start_at}/>
                     )}
-                    onEndReached={handleEndReached}
-                    onEndReachedThreshold={0.1} // Adjust this threshold as needed
                 />
-            </> : null}
+            </View> : null}
             <Text category={'h4'} style={styles.title}>Évènements</Text>
             <View
                 style={{
@@ -157,6 +180,38 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        margin: 5,
+    },
+    imageContainer: {
+        flex: 1,
+        height: 150,
+        width: 650,
+        backgroundColor: 'red'
+    },
+    textContainer: {
+        flex: 1,
+        marginLeft: 10,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 8,
+    },
+    description: {
+        marginTop:10,
+        fontSize: 16,
+        color: '#333',
+    },
+    postedBy: {
+        fontSize: 14,
+        color: '#666',
+        marginTop: 15,
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
@@ -166,6 +221,9 @@ const styles = StyleSheet.create({
     title: {
         marginTop: 5,
     },
+    viewRappel: {
+        marginBottom: 10,
+    }
 });
 
 export default Home;
