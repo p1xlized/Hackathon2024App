@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import { Text } from '@ui-kitten/components';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Icon, Text} from '@ui-kitten/components';
 import FullWidthImage from 'react-native-fullwidth-image';
 
 const Header = () => {
@@ -18,7 +18,7 @@ const Header = () => {
     );
 };
 
-export const EventCard = ({ eventName = '', locationName = '' }) => {
+export const EventCard = ({ eventName = '', locationName = '', tags=[] }) => {
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
@@ -34,6 +34,16 @@ export const EventCard = ({ eventName = '', locationName = '' }) => {
                 <Text category="s1">{eventName}</Text>
                 <Text category="c1">{locationName}</Text>
                 <Text category="c2">19h00 - 20h00</Text>
+
+                <View style={styles.tagList}>
+                    { tags.length > 0 && tags.map((tag) => {
+                        return <TouchableOpacity key={tag.id}>
+                            <View style={styles.eventTag}>
+                                <Text category={"c1"} style={{color: "white"}}>{tag.name}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    })}
+                </View>
             </View>
         </View>
     );
@@ -63,6 +73,25 @@ const styles = StyleSheet.create({
     },
     cardImageLeft: {
         resizeMode: 'cover',
-        aspectRatio: 1
+        height: "100%"
     },
+    eventTag: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        columnGap: 7,
+        justifyContent: "space-between",
+        alignSelf: "flex-start",
+        backgroundColor: "orange",
+        borderRadius: 9,
+        paddingVertical: 3,
+        paddingHorizontal: 7,
+    },
+    tagList: {
+        marginVertical: 5,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        columnGap: 5
+    }
 });
