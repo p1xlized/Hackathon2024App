@@ -70,7 +70,7 @@ export const Header = () => {
             <Authors name="Alexandru Paduret" githubUsername="p1xlized" avatar={require('../assets/icon.jpeg')} />
             <Authors name="Nathan Decopain" githubUsername="NathanDecopain" avatar={require('../assets/icon2.png')} />
             <Authors name="Adrien Dolci" githubUsername="Skamandrius" avatar={require('../assets/icon3.png')} />
-            <Authors name="Samy" githubUsername="samyiss" avatar={require('../assets/icon4.png')} />
+            <Authors name="Samy Issiakhem" githubUsername="samyiss" avatar={require('../assets/icon4.png')} />
           </View>
           <Text style={styles.madeByText}>Made by Team NASA</Text>
         </View>
