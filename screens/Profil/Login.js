@@ -1,38 +1,72 @@
-import React, { useState } from 'react';
-import {ScrollView, StyleSheet, View, Image, TouchableHighlight} from 'react-native';
-import {Button, Text} from '@ui-kitten/components';
-import CustomInput from './CustomInput';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, View, Image, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {Button, Icon, Input, Text} from '@ui-kitten/components';
 import { supabase } from '../../lib/supabase';
 import Logo from '../../lib/building.png';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-export default  function LogIn({navigation}) {
+export default function Login({navigation}) {
     const [contact, setContact] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleChangeContact = (e) => {
-        setContact(e.target.value);
-    };
-
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    };
-
     const handleLogIn = async () => {
         try {
-            const j = await supabase.auth.signInWithPassword({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email: contact,
                 password: password,
-            });
+            })
 
-            console.log(j)
+            if (error) {
+                if (error.toString().includes("Invalid login")) alert("Courriel ou mot de passe invalide. Veuillez réessayer.")
+                else if (error.toString().includes("not confirmed")) alert("Veuillez confirmer votre courriel pour continuer.")
+            } else {
+                const id = data.session.user.id.toString()
+                const token = data.session.access_token.toString()
+                try {
+                    await AsyncStorage.setItem("id", id);
+                    await AsyncStorage.setItem("token", token);
 
-            // Handle success or navigate to the next screen
+                    navigation.navigate("Accueil")
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                }
+            }
         } catch (error) {
             console.error(error);
             // Handle error
         }
     };
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const contact = await AsyncStorage.getItem("email");
+                const password = await AsyncStorage.getItem("password");
+
+                setContact(contact);
+                setPassword(password);
+            } catch (error) {
+                console.error('Error getting data:', error);
+            }
+        };
+
+        getData().then(() => console.log("fetched"));
+    }, []);
+
+    const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+
+    const toggleSecureEntry = () => {
+        setSecureTextEntry(!secureTextEntry);
+    };
+
+    const renderIcon = (props) => (
+        <TouchableOpacity onPress={toggleSecureEntry}>
+            <Icon
+                {...props}
+                name={secureTextEntry ? 'eye-off' : 'eye'}
+            />
+        </TouchableOpacity>
+    );
 
     return (
         <ScrollView style={styles.container}>
@@ -48,8 +82,27 @@ export default  function LogIn({navigation}) {
                 CityLife
             </Text>
             <View style={styles.content}>
-                <CustomInput placeHolder={"Contact"} value={contact} setValue={handleChangeContact} />
-                <CustomInput placeHolder={"Mot de passe"} value={password} setValue={handleChangePassword} />
+                <View style={styles.inputContainer}>
+                    <Input
+                        value={contact}
+                        placeholder={"Contact"}
+                        style={styles.input}
+                        size='large'
+                        onChangeText={val => setContact(val)}
+                    />
+                </View>
+
+                <View style={styles.inputContainer}>
+                    <Input
+                        style={styles.input}
+                        value={password}
+                        size='large'
+                        placeholder={"Mot de passe"}
+                        accessoryRight={renderIcon}
+                        secureTextEntry={secureTextEntry}
+                        onChangeText={val => setPassword(val)}
+                    />
+                </View>
                 <Text style={styles.subtitle}> Mot de passe oublié?</Text>
             </View>
 
@@ -102,5 +155,11 @@ const styles = StyleSheet.create({
         height: 90,
         width: 90,
         borderRadius: 40,
-    }
+    },
+    inputContainer: {
+        marginBottom: 20
+    },
+    input: {
+        borderRadius: 10
+    },
 });
