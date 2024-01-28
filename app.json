@@ -5,7 +5,15 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b0999a36-a77a-4d38-b745-e9d9dbf417d2"
+      }
+    }
   },
-  "name": "AppTestReactive"
+  "name": "AppTestReactive",
+  "android": {
+    "googleServicesFile": "./android/app/google-services.json"
+  }
 }
