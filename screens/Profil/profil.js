@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
 
+import supabase from "../../lib/supabase";
+
 
 export default function Profil(){
     //style sheets
@@ -23,24 +25,28 @@ export default function Profil(){
 
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
-    const [firstName, setFirstName] = useState(null)
-    const [lastName, setLastName] = useState(null)
-    const [emailAdress, setEmailAdress] = useState(null)
-    const [homeAdress, setHomeAdress] = useState(null)
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [emailAdress, setEmailAdress] = useState("")
+    const [homeAdress, setHomeAdress] = useState("")
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
     async function getProfil(){
         console.log("get profil")
-        //TODO( implement API get request for profil informations )
-        //example values
-        setFirstName("John")
-        setLastName("Doe")
-        setEmailAdress("johnD@gmail.com")
-        setHomeAdress("1234 rue de la manche")
-        setProfilPicture("https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg")
-    }
+        try {
+            const { data, error } = await supabase.from('users').select('*');
+            if (error) {
+            console.log(error);
+            } else {
+            console.log(data);
+            }
+        } catch (error) {
+            console.error(error);
+            setError(error);
+        }
+    };
 
     function updateProfil(){
         //TODO(update profil with user input)
