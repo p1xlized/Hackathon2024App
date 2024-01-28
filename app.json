@@ -12,7 +12,7 @@
       }
     }
   },
-  "name": "AppTestReactive",
+  "name": "CityLife",
   "android": {
     "googleServicesFile": "./android/app/google-services.json"
   }
