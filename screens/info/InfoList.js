@@ -4,6 +4,7 @@ import { Layout } from "@ui-kitten/components";
 import supabase from "../../lib/supabase";
 import ServicesCard from "../../components/ServicesCard";
 
+
 const InfoList = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -36,8 +37,8 @@ const InfoList = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-
       <ScrollView>
+      <Map />
         <Layout>
           {data.map((item) => (
             <View style={styles.ServicesCard} key={item.id}>
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   },
   ServicesCard: {
     marginTop: 15,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 });
 

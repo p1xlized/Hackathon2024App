@@ -10,6 +10,7 @@ import {
   Text,
 } from "@ui-kitten/components";
 import { StyleSheet, Modal, View } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import Reminder from "./Reminder";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
