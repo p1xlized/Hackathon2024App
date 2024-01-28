@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   },
   ServicesCard: {
     marginTop: 15,
+    marginHorizontal: 10
   },
 });
 

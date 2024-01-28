@@ -28,8 +28,6 @@ const Reminder = () => {
 
   return (
     <View>
-      <Text category="h6">Reminders:</Text>
-      <Divider />
       {data.map((item) => (
         <View key={item.id}>
           <Card status="danger">
