@@ -7,7 +7,7 @@ import LogIn from "../screens/Profil/Login";
 
 const Stack = createStackNavigator();
 
-function aboutStack() {
+function AboutStack() {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -26,4 +26,4 @@ function aboutStack() {
     );
 }
 
-export default aboutStack;
+export default AboutStack;
