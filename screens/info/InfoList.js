@@ -4,13 +4,13 @@ import { Layout } from "@ui-kitten/components";
 import supabase from "../../lib/supabase";
 import ServicesCard from "../../components/ServicesCard";
 
-const InfoList = ({ route, navigation }) => {
+const InfoList = ({ route,navigation }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
-  function handlePress(item) {
-    navigation.navigate("ServicesDetails", item);
-  }
+ function handlePress() {
+  console.log("pressed");
+ }
   // fetch data from database
   useEffect(() => {
     const fetchData = async () => {
@@ -39,13 +39,11 @@ const InfoList = ({ route, navigation }) => {
         <ScrollView>
           <Layout>
             {data.map((item) => (
-              <View style={styles.ServicesCard}>
-                <ServicesCard
-                  key={item.id}
-                  data={item}
-                  handlePress={() => handlePress(item)}
-                />
-              </View>
+
+                <View style={styles.ServicesCard}>
+                  <ServicesCard key={item.id} data={item} handlePress={handlePress}/>
+                </View>
+              
             ))}
           </Layout>
         </ScrollView>
