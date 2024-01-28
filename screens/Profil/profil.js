@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
 import supabase from "../../lib/building.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Profil(){
@@ -24,18 +25,25 @@ export default function Profil(){
 
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [emailAdress, setEmailAdress] = useState("")
-    const [homeAdress, setHomeAdress] = useState("")
+    const [firstName, setFirstName] = useState(null)
+    const [lastName, setLastName] = useState(null)
+    const [emailAdress, setEmailAdress] = useState(null)
+    const [homeAdress, setHomeAdress] = useState(null)
+    const [userId, setUserId] = useState(null)
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
     async function getProfil(){
-        console.log("get profil")
+        try{
+            const id = await AsyncStorage.getItem("id");
+            setUserId(id);
+        } catch (error) {
+            console.error('Error getting data:', error);
+        }
         try {
-            const { data, error } = await supabase.from('users').select('*');
+            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal','photoProfil')
+            .eq('id', userId);
             if (error) {
             console.log(error);
             } else {
