@@ -1,5 +1,5 @@
 // DrawerNavigator.js
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStack from '../screens/home';
 import InfoStack from './InfoStack';
@@ -29,7 +29,7 @@ const DrawerNavigator = (props) => {
     >
       <Tab.Screen name="Accueil" component={HomeStack} />
       <Tab.Screen name="Évènements" component={EventsStack} />
-      <Tab.Screen name="AddEvent" component={AddEvent} />
+      <Tab.Screen name="Publication évènement" component={AddEvent} />
       <Tab.Screen name="Services" component={InfoStack} />
       {token != null ? (
         <Tab.Screen name="Profil" component={Profil} />

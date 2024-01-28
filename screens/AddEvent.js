@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Input, Button } from '@ui-kitten/components';
 import supabase from '../lib/supabase';
 
-const AddEvent = () => {
+const AddEvent = ({navigation}) => {
   const [formData, setFormData] = useState({
     starts_on: new Date(),
     publish_from: new Date(),
@@ -12,7 +12,6 @@ const AddEvent = () => {
     location: '',
     organizer: '',
     description: '',
-    // Add more fields as needed
   });
 
   const handleChange = (key, value) => {
@@ -25,61 +24,63 @@ const AddEvent = () => {
   const handleSubmit = async () => {
     try {
       // Insert data into the Supabase table
-      const { data, error } = await supabase
-        .from('your_table_name')
-        .insert([formData]);
+      const { error } = await supabase.from('events').insert([formData]);
 
-      if (error) {
-        console.error('Error inserting data:', error);
-      } else {
-        console.log('Data inserted successfully:', data);
-        // Clear the form after successful submission
-        setFormData({
-          starts_on: new Date(),
-          publish_from: new Date(),
-          publish_until: new Date(),
-          name: '',
-          location: '',
-          organizer: '',
-          description: '',
-          // Add more fields as needed
-        });
+      if (error) alert("une erreur est survenue. Veuillez ressayer")
+      else {
+        alert("Votre évènement a été publié avec succès.")
+        navigation.navigate("Accueil")
+        setFormData({})
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      alert("une erreur est survenue. Veuillez ressayer")
     }
   };
 
   return (
-    <ScrollView>
+      <ScrollView style={styles.container}>
       <View style={styles.container}>
-        <Input
-          label="Event Name"
-          placeholder="Enter event name"
-          value={formData.name}
-          onChangeText={(value) => handleChange('name', value)}
-        />
-        <Input
-          label="Location"
-          placeholder="Enter location"
-          value={formData.location}
-          onChangeText={(value) => handleChange('location', value)}
-        />
-        <Input
-          label="Organizer"
-          placeholder="Enter organizer name"
-          value={formData.organizer}
-          onChangeText={(value) => handleChange('organizer', value)}
-        />
-        <Input
-          label="Description"
-          placeholder="Enter event description"
-          value={formData.description}
-          onChangeText={(value) => handleChange('description', value)}
-        />
-        {/* Add more Input components for other fields */}
+        <View style={[styles.inputContainer, {marginTop: 50}]}>
+          <Input
+              value={formData.name}
+              placeholder={"Nom de l'évènement"}
+              style={styles.input}
+              size='large'
+              onChangeText={(value) => handleChange('name', value)}
+          />
+        </View>
 
-        <Button onPress={handleSubmit}>Submit</Button>
+        <View style={styles.inputContainer}>
+          <Input
+              value={formData.location}
+              placeholder={"Lieu de l'évènement"}
+              style={styles.input}
+              size='large'
+              onChangeText={(value) => handleChange('location', value)}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Input
+              value={formData.organizer}
+              placeholder={"Organisateur"}
+              style={styles.input}
+              size='large'
+              onChangeText={(value) => handleChange('organizer', value)}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Input
+              value={formData.description}
+              placeholder={"Description de l'évènement"}
+              style={styles.input}
+              size='large'
+              onChangeText={(value) => handleChange('description', value)}
+          />
+        </View>
+
+        <Button style={styles.button} onPress={handleSubmit}>Publier</Button>
       </View>
     </ScrollView>
   );
@@ -87,7 +88,22 @@ const AddEvent = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  button: {
+    marginBottom: 50,
+    marginTop: 185,
+    width: '100%',
+    borderRadius: 25,
+  },
+  inputContainer: {
+    marginBottom: 20
+  },
+  input: {
+    borderRadius: 10
   },
 });
 
