@@ -17,7 +17,7 @@ const ServicesCard = (props) => {
       </View>
       <Divider style={{ marginBottom: 20, backgroundColor: "#fff" }} />
       <View styles={styles.button}>
-        <Button onPress={handlePress()}>En Savoir Plus</Button>
+      <Button onPress={handlePress}>En Savoir Plus</Button>
       </View>
     </Card>
   );

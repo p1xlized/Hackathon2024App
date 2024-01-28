@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import supabase from '../../lib/supabase';
 
-const InfoDetail = ({ data: initialData }) => {
+const InfoDetail = ({ route }) => {
+  const { params } = route;
   const [detailData, setDetailData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -12,7 +13,8 @@ const InfoDetail = ({ data: initialData }) => {
         const { data, error } = await supabase
           .from('services')
           .select('*')
-          .eq('id', initialData.id);
+          .eq('id', params.id);
+
         if (error) {
           setError(error);
         } else {
@@ -25,7 +27,7 @@ const InfoDetail = ({ data: initialData }) => {
       }
     };
     fetchData();
-  }, [initialData]);
+  }, [params.id]);
 
   return (
     <View>
