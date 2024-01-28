@@ -9,11 +9,10 @@ import Login from '../screens/Profil/login';
 
 export const userInfos = React.createContext();
 
-const [userId, setUserId] = useState(null)
 const Tab = createBottomTabNavigator();
 const DrawerNavigator = () => {
+    const [userId, setUserId] = useState(null)
     return (
-        <userInfos.Provider value={userId}>
             <Tab.Navigator>
             <Tab.Screen name="Accueil" component={HomeStack} />
             <Tab.Screen name="Évènements" component={EventsStack} />
@@ -23,7 +22,6 @@ const DrawerNavigator = () => {
             <Tab.Screen name="Login" component={Login}/>
             }
         </Tab.Navigator>
-        </userInfos.Provider>
         
     );
 };
