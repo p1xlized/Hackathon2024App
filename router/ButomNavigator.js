@@ -8,7 +8,7 @@ import EventsStack from "./EventsStack";
 import Profil from '../screens/Profil/profil';
 import {TabBar} from '../components/TabBar';
 
-export const userInfos = React.createContext();
+export const currentUserContext = React.createContext();
 
 const Tab = createBottomTabNavigator();
 const DrawerNavigator = () => {

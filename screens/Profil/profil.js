@@ -1,27 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
+import { currentUserContext } from '../../App';
 
 import supabase from "../../lib/supabase";
 
 export default function Profil({navigation}){
-    //style sheets
-    const styles = StyleSheet.create({
-        view:{
-            margin: 5
-        },
-        container: {
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-        },
-        text:{ 
-            margin: 4
-        },
-        button: {
-            margin: 2,
-          }
-      });
-
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
     const [firstName, setFirstName] = useState(null)
@@ -33,14 +17,16 @@ export default function Profil({navigation}){
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
-    setProfilPicture("")
-    setFirstName("John")
-    setLastName("Doe")
-    setEmailAdress("johnd@gmail.com")
-    setHomeAdress("1234 rue de la manche")
     //TODO(make get request from database)
-    /*async function getProfil(){
+    async function getProfil(){
+        console.log(userId)
+        setProfilPicture("")
+        setFirstName("John")
+        setLastName("Doe")
+        setEmailAdress("johnd@gmail.com")
+        setHomeAdress("1234 rue de la manche")
         console.log("get profil")
+        /*
         try {
             const { data, error } = await supabase.from('users').select('*');
             if (error) {
@@ -51,8 +37,8 @@ export default function Profil({navigation}){
         } catch (error) {
             console.error(error);
             setError(error);
-        }
-    };*/
+        }*/
+    };
 
     function updateProfil(){
         //TODO(update profil with user input)
@@ -60,14 +46,8 @@ export default function Profil({navigation}){
     }
 
     useEffect(() => {
-        if(userId == null){
-            navigation.navigate("Login")
-        }
-        else{
-          getProfil()  
-        }
+        getProfil()  
     },[])
-
     return(
         <View style={styles.view}>
             <Avatar
@@ -141,3 +121,20 @@ export default function Profil({navigation}){
         </View>
     );
 }
+
+//style sheets
+const styles = StyleSheet.create({
+    view:{
+        margin: 5
+    },
+    container: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    text:{ 
+        margin: 4
+    },
+    button: {
+        margin: 2,
+      }
+  });
