@@ -4,9 +4,13 @@ import { Layout } from "@ui-kitten/components";
 import supabase from "../../lib/supabase";
 import ServicesCard from "../../components/ServicesCard";
 
-const InfoDetails = ({ route }) => {
+const InfoList = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+
+  function handlePress() {
+    console.log("pressed");
+  }
 
   // fetch data from database
   useEffect(() => {
@@ -32,32 +36,28 @@ const InfoDetails = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.page}>
-        <ScrollView>
-          <Layout>
-            {data.map((item) => (
-              <View style={styles.ServicesCard}>
-                <ServicesCard key={item.id} data={item} />
-              </View>
-            ))}
-          </Layout>
-        </ScrollView>
-      </View>
+
+      <ScrollView>
+        <Layout>
+          {data.map((item) => (
+            <View style={styles.ServicesCard} key={item.id}>
+              <ServicesCard data={item} handlePress={handlePress} />
+            </View>
+          ))}
+        </Layout>
+      </ScrollView>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: "#fff",
   },
   ServicesCard: {
     marginTop: 15,
   },
-  page: {
-    marginHorizontal: 10,
-    marginTop: 10,
-  },
 });
-export default InfoDetails;
+
+export default InfoList;

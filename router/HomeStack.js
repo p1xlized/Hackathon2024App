@@ -1,10 +1,11 @@
 //aboutStack.js import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/home";
+import Billboard from "../screens/Billboard/billboard";
 
 const Stack = createStackNavigator();
 
-function aboutStack() {
+function AboutStack() {
     return (
 
         <Stack.Navigator
@@ -19,9 +20,9 @@ function aboutStack() {
                 headerShown: false
             }}
         >
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="billboard" component={Home} />
         </Stack.Navigator>
     );
 }
 
-export default aboutStack;
+export default AboutStack;

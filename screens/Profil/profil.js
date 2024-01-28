@@ -1,42 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Text, Input, Button, Layout, Avatar } from '@ui-kitten/components';
+import { currentUserContext } from '../../App';
 
 import supabase from "../../lib/supabase";
 
-
 export default function Profil(){
-    //style sheets
-    const styles = StyleSheet.create({
-        view:{
-            margin: 5
-        },
-        container: {
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-        },
-        text:{ 
-            margin: 4
-        },
-        button: {
-            margin: 2,
-          }
-      });
-
     //profil variables
     const [profilPicture, setProfilPicture] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [emailAdress, setEmailAdress] = useState("")
-    const [homeAdress, setHomeAdress] = useState("")
+    const [firstName, setFirstName] = useState(null)
+    const [lastName, setLastName] = useState(null)
+    const [emailAdress, setEmailAdress] = useState(null)
+    const [homeAdress, setHomeAdress] = useState(null)
+    const {userId} = useContext(currentUserContext);
 
     //sreen variables
     const [modifying, setModifying] = useState(false)
 
+    //TODO(make get request from database)
     async function getProfil(){
+        console.log(userId)
+        setProfilPicture("")
+        setFirstName("John")
+        setLastName("Doe")
+        setEmailAdress("johnd@gmail.com")
+        setHomeAdress("1234 rue de la manche")
         console.log("get profil")
+        /*
         try {
-            const { data, error } = await supabase.from('users').select('*');
+            const { data, error } = await supabase.from('users').select('nom','prenom','email','rue','codePostal',photoProfil)
+            .where(id = userId);
             if (error) {
             console.log(error);
             } else {
@@ -45,7 +38,7 @@ export default function Profil(){
         } catch (error) {
             console.error(error);
             setError(error);
-        }
+        }*/
     };
 
     function updateProfil(){
@@ -54,19 +47,16 @@ export default function Profil(){
     }
 
     useEffect(() => {
-        getProfil()
+        getProfil()  
     },[])
-
     return(
         <View style={styles.view}>
             <Avatar
             size='giant'
             source={{uri: profilPicture}}
             />
-            <Text style={styles.text} category='s2'>
-                Prenom
-            </Text>
             <Input
+            label='Nom'
             value={firstName}
             disabled={!modifying}
             
@@ -132,3 +122,20 @@ export default function Profil(){
         </View>
     );
 }
+
+//style sheets
+const styles = StyleSheet.create({
+    view:{
+        margin: 5
+    },
+    container: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    text:{ 
+        margin: 4
+    },
+    button: {
+        margin: 2,
+      }
+  });
