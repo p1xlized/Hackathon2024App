@@ -3,12 +3,11 @@
 A mobile app designed to provide a comprehensive view of all the events, services, and reminders available in your city.
 
 ## Table of Contents
-
+- [Supabase](#supabse)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Supabase](#supabse)
-- [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Hackathon](#hackathon)
 
 ## Supabase
 Replace supabase URL and API keys by ur keys: 
@@ -66,5 +65,5 @@ Open Expo Go on Your Mobile Device and Scan the QR code displayed in the termina
 
 [Expo](https://expo.dev/) is a set of tools and services built around React Native to help you develop, build, and deploy your React Native applications more easily. It provides a variety of features, including a development server, build tools, and access to native APIs without requiring native code development.
 
-## Hackton
+## Hackathon
 Un immense merci aux organisateurs du ApplETS Mobile Challenge Hackathon 2024 ! Participer à cet événement a été un plaisir immense.
