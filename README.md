@@ -19,7 +19,8 @@ To get started with Your App Name, follow these steps:
 
 ```
 git clone https://github.com/your-username/your-app-name.git
-cd your-app-name```
+cd your-app-name
+```
 
 2. Install Dependencies:
 ```
