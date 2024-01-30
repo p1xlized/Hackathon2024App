@@ -8,8 +8,6 @@ A mobile app designed to provide a comprehensive view of all the events, service
 - [Usage](#usage)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -33,3 +31,21 @@ npm start
 ``````
 
 Open Expo Go on Your Mobile Device and Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
+
+## Technologies Used
+
+#### React Native
+
+[React Native](https://reactnative.dev/) is a framework for building mobile applications using React and JavaScript. It allows you to create native mobile apps for both iOS and Android platforms.
+
+#### React Navigation
+
+[React Navigation](https://reactnavigation.org/) is a popular navigation library for React Native. It provides a customizable and easy-to-use navigation solution for building navigation structures in your mobile app.
+
+#### UI Kitten
+
+[UI Kitten](https://akveo.github.io/react-native-ui-kitten/) is a React Native framework for creating stunning UIs. It comes with a set of customizable components that follow the "Kitten Tricks" design system, making it easy to create beautiful and consistent user interfaces.
+
+#### Expo
+
+[Expo](https://expo.dev/) is a set of tools and services built around React Native to help you develop, build, and deploy your React Native applications more easily. It provides a variety of features, including a development server, build tools, and access to native APIs without requiring native code development.
