@@ -49,17 +49,17 @@ npm start
 Open Expo Go on Your Mobile Device and Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
 
 ## Contributors
+
 Thanks to the following contributors who helped make this project a reality:
 
 1. **[NathanDecopain](https://github.com/NathanDecopain)**
-   ![NathanDecopain](https://avatars.githubusercontent.com/u/68757668?v=4)
+   <img src="https://avatars.githubusercontent.com/u/68757668?v=4" alt="NathanDecopain" width="50" style="border-radius:50%"/>
 
 2. **[samyiss](https://github.com/samyiss)**
-   ![Jane Smith](https://avatars.githubusercontent.com/u/98336943?v=4)
+   <img src="https://avatars.githubusercontent.com/u/98336943?v=4" alt="samyiss" width="50" style="border-radius:50%"/>
 
 3. **[Skamandrius](https://github.com/Skamandrius)**
-   ![Bob Johnson](https://avatars.githubusercontent.com/u/157740111?v=4)
-
+   <img src="https://avatars.githubusercontent.com/u/157740111?v=4" alt="Skamandrius" width="50" style="border-radius:50%"/>
 
 ## Technologies Used
 
