@@ -30,5 +30,6 @@ npm install
 #### Start the Expo Development Server:
 ```
 npm start
-```
+``````
+
 Open Expo Go on Your Mobile Device and Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
