@@ -6,7 +6,7 @@ A mobile app designed to provide a comprehensive view of all the events, service
 - [Supabase](#supabse)
 - [Installation](#installation)
 - [Usage](#usage)
-- 
+- [Contributors](#contributors)
 - [Technologies Used](#technologies-used)
 - [Hackathon](#hackathon)
 
