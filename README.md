@@ -6,6 +6,7 @@ A mobile app designed to provide a comprehensive view of all the events, service
 - [Supabase](#supabse)
 - [Installation](#installation)
 - [Usage](#usage)
+- 
 - [Technologies Used](#technologies-used)
 - [Hackathon](#hackathon)
 
@@ -46,6 +47,19 @@ npm start
 ``````
 
 Open Expo Go on Your Mobile Device and Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
+
+## Contributors
+Thanks to the following contributors who helped make this project a reality:
+
+1. **[John Doe](https://github.com/johndoe)**
+   ![John Doe](https://github.com/johndoe.png)
+
+2. **[Jane Smith](https://github.com/janesmith)**
+   ![Jane Smith](https://github.com/janesmith.png)
+
+3. **[Bob Johnson](https://github.com/bobjohnson)**
+   ![Bob Johnson](https://github.com/bobjohnson.png)
+
 
 ## Technologies Used
 
