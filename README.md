@@ -6,9 +6,25 @@ A mobile app designed to provide a comprehensive view of all the events, service
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Supabase](#supabse)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 
+## Supabase
+Replace supabase URL and API keys by ur keys: 
+```
+// /src/lib/supabase.js
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'YOUR_SUPABASE_URL';
+const supabaseKey = 'YOUR_SUPABASE_API_KEY';
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default supabase;
+
+```
 ## Installation
 
 To get started with Your App Name, follow these steps:
@@ -49,3 +65,6 @@ Open Expo Go on Your Mobile Device and Scan the QR code displayed in the termina
 #### Expo
 
 [Expo](https://expo.dev/) is a set of tools and services built around React Native to help you develop, build, and deploy your React Native applications more easily. It provides a variety of features, including a development server, build tools, and access to native APIs without requiring native code development.
+
+## Hackton
+Un immense merci aux organisateurs du ApplETS Mobile Challenge Hackathon 2024 ! Participer à cet événement a été un plaisir immense.
