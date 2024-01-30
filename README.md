@@ -52,14 +52,14 @@ Open Expo Go on Your Mobile Device and Scan the QR code displayed in the termina
 
 Thanks to the following contributors who helped make this project a reality:
 
-   <img src="https://avatars.githubusercontent.com/u/68757668?v=4" alt="NathanDecopain" width="50" style="border-radius:10px"/>
-1. **[NathanDecopain](https://github.com/NathanDecopain)**
+   
+1.<img src="https://avatars.githubusercontent.com/u/68757668?v=4" alt="NathanDecopain" width="50" style="border-radius:10px"/> [NathanDecopain](https://github.com/NathanDecopain)
 
-   <img src="https://avatars.githubusercontent.com/u/98336943?v=4" alt="samyiss" width="50" style="border-radius:50%"/>
-2. **[samyiss](https://github.com/samyiss)**
+   
+3.<img src="https://avatars.githubusercontent.com/u/98336943?v=4" alt="samyiss" width="50" style="border-radius:50%"/> [samyiss](https://github.com/samyiss)
 
-   <img src="https://avatars.githubusercontent.com/u/157740111?v=4" alt="Skamandrius" width="50" style="border-radius:50%"/>
-3. **[Skamandrius](https://github.com/Skamandrius)**
+   
+4.<img src="https://avatars.githubusercontent.com/u/157740111?v=4" alt="Skamandrius" width="50" style="border-radius:50%"/> [Skamandrius](https://github.com/Skamandrius)
 
 ## Technologies Used
 
