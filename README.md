@@ -52,11 +52,12 @@ Open Expo Go on Your Mobile Device and Scan the QR code displayed in the termina
 
 Thanks to my teammates who helped make this project a reality <3:
 
-1. [![NathanDecopain](https://avatars.githubusercontent.com/u/68757668?v=4)](https://github.com/NathanDecopain)
+1. [![NathanDecopain](https://avatars.githubusercontent.com/u/68757668?v=4 | height=50)](https://github.com/NathanDecopain)
 
-2. [![samyiss](https://avatars.githubusercontent.com/u/98336943?v=4)](https://github.com/samyiss)
+2. [![samyiss](https://avatars.githubusercontent.com/u/98336943?v=4 | height=50)](https://github.com/samyiss)
 
-3. [![Skamandrius](https://avatars.githubusercontent.com/u/157740111?v=4)](https://github.com/Skamandrius)
+3. [![Skamandrius](https://avatars.githubusercontent.com/u/157740111?v=4 | height=50)](https://github.com/Skamandrius)
+
 
 ## Technologies Used
 
