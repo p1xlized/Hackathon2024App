@@ -51,14 +51,14 @@ Open Expo Go on Your Mobile Device and Scan the QR code displayed in the termina
 ## Contributors
 Thanks to the following contributors who helped make this project a reality:
 
-1. **[John Doe](https://github.com/johndoe)**
-   ![John Doe](https://github.com/johndoe.png)
+1. **[NathanDecopain](https://github.com/NathanDecopain)**
+   ![NathanDecopain](https://avatars.githubusercontent.com/u/68757668?v=4)
 
-2. **[Jane Smith](https://github.com/janesmith)**
-   ![Jane Smith](https://github.com/janesmith.png)
+2. **[samyiss](https://github.com/samyiss)**
+   ![Jane Smith](https://avatars.githubusercontent.com/u/98336943?v=4)
 
-3. **[Bob Johnson](https://github.com/bobjohnson)**
-   ![Bob Johnson](https://github.com/bobjohnson.png)
+3. **[Skamandrius](https://github.com/Skamandrius)**
+   ![Bob Johnson](https://avatars.githubusercontent.com/u/157740111?v=4)
 
 
 ## Technologies Used
