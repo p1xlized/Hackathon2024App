@@ -31,6 +31,4 @@ npm install
 ```
 npm start
 ```
-***Open Expo Go on Your Mobile Device:
-
-    Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.***
+Open Expo Go on Your Mobile Device and Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
