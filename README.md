@@ -15,22 +15,22 @@ A mobile app designed to provide a comprehensive view of all the events, service
 
 To get started with Your App Name, follow these steps:
 
-1. Clone the Repository:
+#### Clone the Repository:
 
 ```
 git clone https://github.com/your-username/your-app-name.git
 cd your-app-name
 ```
 
-2. Install Dependencies:
+#### Install Dependencies:
 ```
 npm install
 ```
 
-3. Start the Expo Development Server:
+#### Start the Expo Development Server:
 ```
 npm start
 ```
-Open Expo Go on Your Mobile Device:
+***Open Expo Go on Your Mobile Device:
 
-    Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.
+    Scan the QR code displayed in the terminal using the Expo Go app on your mobile device.***
