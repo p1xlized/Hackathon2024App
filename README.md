@@ -32,8 +32,8 @@ To get started with Your App Name, follow these steps:
 #### Clone the Repository:
 
 ```
-git clone https://github.com/your-username/your-app-name.git
-cd your-app-name
+git clone https://github.com/p1xlized/Hackathon2024App
+cd Hackathon2024App
 ```
 
 #### Install Dependencies:
