@@ -27,7 +27,7 @@ export default supabase;
 ```
 ## Installation
 
-To get started with Your App Name, follow these steps:
+To get started, follow these steps:
 
 #### Clone the Repository:
 
